@@ -17,7 +17,7 @@ def stsassume(awsaccount, environment, sessionname) {
                     }
                 }
 
-                sh label: 'role', script: '''aws sts assume-role --role-arn arn:aws:iam::${awsaccount}:role/407ETR_SharedServicesRole_CodeBuild_JenkinsWorker --role-session-name ${sessionname} > temp_role'''
+                sh label: 'role', script: '''aws sts assume-role --role-arn arn:aws:iam::${awsaccount}:role/JenkinsExecutionRole --role-session-name ${sessionname} > temp_role'''
                 env.AWS_ACCESS_KEY_ID = sh (script : "cat temp_role | jq .Credentials.AccessKeyId | xargs", returnStdout: true).trim()
                 env.AWS_SECRET_ACCESS_KEY = sh (script : "cat temp_role | jq .Credentials.SecretAccessKey | xargs", returnStdout: true).trim()
                 env.AWS_SESSION_TOKEN = sh (script : "cat temp_role | jq .Credentials.SessionToken | xargs", returnStdout: true).trim()
