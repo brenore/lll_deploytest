@@ -41,7 +41,7 @@ pipeline {
         MASTER_BRANCH = 'master'
         PROJECT_NAME = "mobile-infra"
         AWS_DEFAULT_REGION = "us-east-1"
-        DEV_ACCOUNT_ID = "sanbrar-lululemon"
+        DEV_ACCOUNT_ID = "317787813693"
         QAT_ACCOUNT_ID = "1234"
         UAT_ACCOUNT_ID = "1234"
         PROD_ACCOUNT_ID = "1234"
