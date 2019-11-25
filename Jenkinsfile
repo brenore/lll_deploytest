@@ -78,15 +78,13 @@ pipeline {
 
         stage('Python-VirtualEnv') {
             steps {
-                sh """
+                sh '''
                     echo ${SHELL}
                     [ -d venv ] && rm -rf venv
                     virtualenv --python=python3.6 venv
                     source venv/bin/activate
-                    export PATH=${VIRTUAL_ENV}/bin:${PATH}
-                    #pip install --upgrade pip
                     pip install -r requirements.txt
-                """
+                '''
             }
         }
 
