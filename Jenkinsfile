@@ -53,6 +53,20 @@ pipeline {
     } 
     stages {
 
+        
+
+        stage('Python-VirtualEnv') {
+            steps {
+                sh '''
+                    echo ${SHELL}
+                    [ -d venv ] && rm -rf venv
+                    virtualenv --python=python3.6 venv
+                    source venv/bin/activate
+                    pip install -r requirements.txt
+                '''
+            }
+        }
+
         stage('AWS-Login') {
             steps {
                 script {
@@ -73,18 +87,6 @@ pipeline {
                 }
                 stsassume("${ASSUME_ACCOUNT_ID}","${params.FEATURE_AWS_ENV}","${PROJECT_NAME}")
                 sh "aws sts get-caller-identity"
-            }
-        }
-
-        stage('Python-VirtualEnv') {
-            steps {
-                sh '''
-                    echo ${SHELL}
-                    [ -d venv ] && rm -rf venv
-                    virtualenv --python=python3.6 venv
-                    source venv/bin/activate
-                    pip install -r requirements.txt
-                '''
             }
         }
 
